@@ -1,7 +1,7 @@
+require 'lsv_plus/formatting_helper'
+
 module LSVplus
   class RecordFormatter
-    DATE_FORMAT = '%Y%m%d'
-
     attr_reader :file, :record, :output
 
     def self.call(file, record, index)
@@ -40,19 +40,19 @@ module LSVplus
     end
 
     def processing_date
-      record.processing_date.strftime DATE_FORMAT
+      LSVplus::FormattingHelper.date record.processing_date
     end
 
     def creditor_bank_clearing_number
-      format '%-5s', record.creditor_bank_clearing_number
+      LSVplus::FormattingHelper.clearing_number record.creditor_bank_clearing_number
     end
 
     def creation_date
-      file.creation_date.strftime DATE_FORMAT
+      LSVplus::FormattingHelper.date file.creation_date
     end
 
     def debitor_bank_clearing_number
-      format '%-5s', record.debitor_bank_clearing_number
+      LSVplus::FormattingHelper.clearing_number record.debitor_bank_clearing_number
     end
 
     def creator_identification
@@ -60,7 +60,7 @@ module LSVplus
     end
 
     def record_number
-      format '%07d', @index
+      LSVplus::FormattingHelper.index @index
     end
 
     def currency
@@ -68,27 +68,27 @@ module LSVplus
     end
 
     def amount
-      format('%012.2f', record.amount).sub('.', ',')
+      LSVplus::FormattingHelper.amount record.amount
     end
 
     def creditor_iban
-      format '%-34s', record.creditor_iban
+      LSVplus::FormattingHelper.account record.creditor_iban
     end
 
     def creditor_address
-      format_multiline record.creditor_address
+      LSVplus::FormattingHelper.multiline record.creditor_address
     end
 
     def debitor_account
-      format '%-34s', record.debitor_account
+      LSVplus::FormattingHelper.account record.debitor_account
     end
 
     def debitor_address
-      format_multiline record.debitor_address
+      LSVplus::FormattingHelper.multiline record.debitor_address
     end
 
     def message
-      format_multiline record.message
+      LSVplus::FormattingHelper.multiline record.message
     end
 
     def reference_type
@@ -101,15 +101,6 @@ module LSVplus
 
     def esr_member_id
       format '%-9s', record.esr_member_id
-    end
-
-    def format_multiline(lines)
-      lines_string = StringIO.new
-      4.times do |index|
-        lines_string.write format('%-35s', lines[index])
-      end
-      lines_string.rewind
-      lines_string.read
     end
   end
 end

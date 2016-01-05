@@ -1,6 +1,7 @@
+require 'lsv_plus/formatting_helper'
+
 module LSVplus
   class TotalRecordFormatter
-    DATE_FORMAT = '%Y%m%d'
     TYPE = '890'
     VERSION = '0'
 
@@ -19,7 +20,7 @@ module LSVplus
     end
 
     def creation_date
-      file.creation_date.strftime DATE_FORMAT
+      LSVplus::FormattingHelper.date file.creation_date
     end
 
     def creator_identification
@@ -27,7 +28,7 @@ module LSVplus
     end
 
     def record_number
-      format '%07d', file.records.length
+      LSVplus::FormattingHelper.index file.records.length
     end
 
     def currency
@@ -35,7 +36,7 @@ module LSVplus
     end
 
     def total_amount
-      format('%012.2f', file.total).sub('.', ',')
+      LSVplus::FormattingHelper.amount file.total
     end
   end
 end
