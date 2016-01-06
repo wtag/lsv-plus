@@ -1,13 +1,14 @@
+require 'bigdecimal'
 require 'lsv_plus/base_container'
 require 'lsv_plus/errors'
 
 module LSVplus
   class Record < LSVplus::BaseContainer
     class InvalidProcessingDate < LSVplus::Errors::InvalidAttribute
-      @@attribute = :processing_date
+      ATTRIBUTE = :processing_date
     end
     class InvalidAmount < LSVplus::Errors::InvalidAttribute
-      @@attribute = :amount
+      ATTRIBUTE = :amount
     end
 
     ATTRIBUTES = %i(

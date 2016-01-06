@@ -6,10 +6,10 @@ require 'lsv_plus/total_record_formatter'
 module LSVplus
   class File < LSVplus::BaseContainer
     class InvalidCreatorIdentification < LSVplus::Errors::InvalidAttribute
-      @@attribute = :creator_identification
+      ATTRIBUTE = :creator_identification
     end
     class InvalidLSVIdentification < LSVplus::Errors::InvalidAttribute
-      @@attribute = :lsv_identification
+      ATTRIBUTE = :lsv_identification
     end
 
     ATTRIBUTES = %i(processing_type creation_date creator_identification currency lsv_identification)

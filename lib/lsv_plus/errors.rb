@@ -7,7 +7,7 @@ module LSVplus
       end
 
       def to_s
-        "Attribute #{@@attribute} is invalid: #{@reason}"
+        "Attribute #{self.class::ATTRIBUTE} is invalid: #{@reason}"
       end
     end
   end
