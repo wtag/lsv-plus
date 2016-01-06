@@ -4,7 +4,8 @@ require 'lsv_plus/total_record_formatter'
 
 module LSVplus
   class File < LSVplus::BaseContainer
-    attr_reader :processing_type, :creation_date, :creator_identification, :currency, :lsv_identification
+    ATTRIBUTES = %i(processing_type creation_date creator_identification currency lsv_identification)
+    attr_reader(*ATTRIBUTES)
 
     def add_record(record)
       records << record

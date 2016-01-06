@@ -10,15 +10,5 @@ module LSVplus
         "Attribute #{@@attribute} is invalid: #{@reason}"
       end
     end
-
-    class MissingAttribute < Base
-      def initialize(attribute)
-        @attribute = attribute
-      end
-
-      def to_s
-        "Attribute :#{@attribute} is missing"
-      end
-    end
   end
 end

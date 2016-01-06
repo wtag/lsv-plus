@@ -33,7 +33,7 @@ module LSVplus
     end
 
     def validate(attributes)
-      validate_presence_of_required_attributes(attributes)
+      super(attributes)
       validate_processing_date(attributes)
       validate_amount(attributes)
     end
@@ -50,12 +50,6 @@ module LSVplus
     def validate_amount(attributes)
       if attributes[:amount] > MAX_AMOUNT
         raise InvalidAmount, "Must not be higher than #{MAX_AMOUNT}"
-      end
-    end
-
-    def validate_presence_of_required_attributes(attributes)
-      ATTRIBUTES.each do |attribute|
-        raise LSVplus::Errors::MissingAttribute, attribute unless attributes.key?(attribute)
       end
     end
   end
