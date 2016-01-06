@@ -11,6 +11,7 @@ RSpec.describe 'Simple LSV+ file' do
   let(:debitor_bank_clearing_number) { '42   ' }
   let(:creator_identification) { 'YOLO1' }
   let(:record_number) { '0000001' }
+  let(:lsv_identification) { 'YOLO1' }
   let(:currency) { 'CHF' }
   let(:amount) { '000001337,42' }
   let(:creditor_iban) { 'CH9300762011623852957             ' }
@@ -40,7 +41,7 @@ RSpec.describe 'Simple LSV+ file' do
     [
       record_type, version, processing_type, processing_date,
       creditor_bank_clearing_number, creation_date, debitor_bank_clearing_number,
-      creator_identification, record_number,
+      creator_identification, record_number, lsv_identification,
       currency, amount,
       creditor_iban, creditor_address,
       debitor_account, debitor_address,
@@ -67,6 +68,7 @@ RSpec.describe 'Simple LSV+ file' do
       currency: currency,
       processing_type: 'P',
       creation_date: Date.new(2016, 1, 5),
+      lsv_identification: 'YOLO1',
     }
   end
 

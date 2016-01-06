@@ -19,7 +19,7 @@ module LSVplus
       [
         type, version, processing_type, processing_date,
         creditor_bank_clearing_number, creation_date, debitor_bank_clearing_number,
-        creator_identification, record_number,
+        creator_identification, record_number, lsv_identification,
         currency, amount,
         creditor_iban, creditor_address,
         debitor_account, debitor_address,
@@ -61,6 +61,10 @@ module LSVplus
 
     def record_number
       LSVplus::FormattingHelper.index @index
+    end
+
+    def lsv_identification
+      file.lsv_identification
     end
 
     def currency
