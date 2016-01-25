@@ -61,6 +61,20 @@ RSpec.describe LSVplus::Record do
   end
 
   describe '#==' do
-    specify { expect(LSVplus::Record.new(attributes)).to eq(LSVplus::Record.new(attributes)) }
+    context 'the same object type' do
+      context 'same attributes' do
+        specify { expect(LSVplus::Record.new(attributes)).to eq(LSVplus::Record.new(attributes)) }
+      end
+
+      context 'other attributes' do
+        specify do
+          expect(LSVplus::Record.new(attributes.merge(amount: 1))).to_not eq(LSVplus::Record.new(attributes))
+        end
+      end
+    end
+
+    context 'other object type' do
+      specify { expect(LSVplus::Record.new(attributes)).to_not eq(Object.new) }
+    end
   end
 end

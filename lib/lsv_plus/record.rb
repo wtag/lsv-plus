@@ -56,6 +56,7 @@ module LSVplus
 
     def ==(other)
       ATTRIBUTES.each do |attribute|
+        return false unless other.respond_to?(attribute)
         return false unless send(attribute) == other.send(attribute)
       end
       true
