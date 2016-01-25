@@ -59,4 +59,8 @@ RSpec.describe LSVplus::Record do
       end
     end
   end
+
+  describe '#==' do
+    specify { expect(LSVplus::Record.new(attributes)).to eq(LSVplus::Record.new(attributes)) }
+  end
 end

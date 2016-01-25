@@ -53,5 +53,12 @@ module LSVplus
         raise InvalidAmount, "Must not be higher than #{MAX_AMOUNT}"
       end
     end
+
+    def ==(other)
+      ATTRIBUTES.each do |attribute|
+        return false unless send(attribute) == other.send(attribute)
+      end
+      true
+    end
   end
 end
