@@ -40,7 +40,7 @@ RSpec.describe 'Simple LSV+ file' do
   let(:record_string) do
     [
       record_type, version, processing_type, processing_date,
-      creditor_bank_clearing_number, creation_date, debitor_bank_clearing_number,
+      debitor_bank_clearing_number, creation_date, creditor_bank_clearing_number,
       creator_identification, record_number, lsv_identification,
       currency, amount,
       creditor_iban, creditor_address,
@@ -90,8 +90,10 @@ RSpec.describe 'Simple LSV+ file' do
   end
 
   it 'returns a valid LSV+ file' do
-    file = LSVplus::File.new(file_attributes)
-    file.add_record LSVplus::Record.new(record_attributes)
-    expect(file.to_s).to eq(valid_output)
+    Timecop.travel(Date.new(2016, 1, 10)) do
+      file = LSVplus::File.new(file_attributes)
+      file.add_record LSVplus::Record.new(record_attributes)
+      expect(file.to_s).to eq(valid_output)
+    end
   end
 end

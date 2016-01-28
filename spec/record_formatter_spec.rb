@@ -29,6 +29,12 @@ RSpec.describe LSVplus::RecordFormatter do
   let(:index) { 1 }
   let(:instance) { LSVplus::RecordFormatter.new(file, record, index) }
 
+  around do |example|
+    Timecop.travel(Date.new(2016, 1, 10)) do
+      example.call
+    end
+  end
+
   describe '.call' do
     let(:record_formatter_double) { instance_double(LSVplus::RecordFormatter) }
 
@@ -43,7 +49,7 @@ RSpec.describe LSVplus::RecordFormatter do
   describe '#call' do
     it 'returns all the formatted fields as string' do
       %i(type version processing_type processing_date
-         creditor_bank_clearing_number creation_date debitor_bank_clearing_number
+         debitor_bank_clearing_number creation_date creditor_bank_clearing_number
          creator_identification record_number lsv_identification
          currency amount
          creditor_iban creditor_address
